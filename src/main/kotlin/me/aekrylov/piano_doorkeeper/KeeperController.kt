@@ -1,8 +1,8 @@
 package me.aekrylov.piano_doorkeeper
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -14,7 +14,7 @@ class KeeperController(
 ) {
 
     @GetMapping("/check")
-    fun check(@RequestBody request: CheckRequest): ResponseEntity<CheckResponse> {
+    fun check(request: CheckRequest): ResponseEntity<CheckResponse> {
         val user = User(request.keyId)
 
         if (!request.entrance) {
@@ -48,6 +48,7 @@ data class CheckRequest(
         val entrance: Boolean
 )
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 sealed class CheckResponse(val code: String, val message: String? = null)
 
 object AccessDenied: CheckResponse("access_denied")
