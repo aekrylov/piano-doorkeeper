@@ -3,6 +3,7 @@ version: '3.5'
 services:
   redis:
     image: "redis:6.0-alpine"
+    command: redis-server --appendonly yes --save 60 100
     volumes:
     - redis-data:/var/lib/redis
     expose:
