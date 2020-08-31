@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+  redis:
+    image: "redis:6.0-alpine"
+    volumes:
+    - redis-data:/var/lib/redis
+    expose:
+      - 6379
+    hostname: redis
+
+  app:
+    build:
+      context: ./
+    depends_on:
+      - redis
+    environment:
+      spring_redis_host: redis
+      spring_redis_port: 6379
+    ports:
+      - 8080
+
+volumes:
+  redis-data:
+

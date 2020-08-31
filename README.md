@@ -17,5 +17,6 @@ Content-Length: 24
 
 ## How to run 
 
-* `./gradlew bootRun`
+* `docker-compose up -d`
+* Setup a local Redis instance manually and run `./gradlew bootRun`
 
