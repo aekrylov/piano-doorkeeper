@@ -20,8 +20,6 @@ extra["snippetsDir"] = file("build/generated-snippets")
 extra["testcontainersVersion"] = "1.14.3"
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
@@ -36,7 +34,6 @@ dependencies {
 
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
-    testImplementation("org.springframework.security:spring-security-test")
     testImplementation("org.testcontainers:junit-jupiter")
 
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
