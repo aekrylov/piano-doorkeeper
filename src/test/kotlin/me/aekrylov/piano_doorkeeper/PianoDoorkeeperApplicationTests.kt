@@ -116,6 +116,5 @@ class PianoDoorkeeperApplicationTests {
                     "spring.redis.port=${redis.firstMappedPort}"
             )
         }
-
     }
 }

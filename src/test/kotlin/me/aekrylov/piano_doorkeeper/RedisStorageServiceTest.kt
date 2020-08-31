@@ -2,31 +2,27 @@ package me.aekrylov.piano_doorkeeper
 
 import io.kotlintest.matchers.types.shouldBeInstanceOf
 import io.kotlintest.shouldBe
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.springframework.data.redis.connection.RedisStandaloneConfiguration
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory
-import org.springframework.data.redis.core.StringRedisTemplate
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.ApplicationContextInitializer
+import org.springframework.context.ConfigurableApplicationContext
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.support.TestPropertySourceUtils
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 
 @Testcontainers
+@SpringBootTest
+@ContextConfiguration(initializers = [RedisStorageServiceTest.PropertyInitializer::class])
 class RedisStorageServiceTest {
 
+    @Autowired
     private lateinit var service: StorageService
 
     private val id = ID.next()
     private val user = User(id)
     private val room = id
-
-    @BeforeEach
-    fun setup() {
-        service = RedisStorageService(
-                StringRedisTemplate(LettuceConnectionFactory(RedisStandaloneConfiguration(
-                        redis.host,
-                        redis.firstMappedPort
-                ))))
-    }
 
     @Test
     fun `user should be able to enter a room successfully`() {
@@ -65,10 +61,20 @@ class RedisStorageServiceTest {
     }
 
     companion object {
-
         @Container
         var redis: RedisContainer = RedisContainer()
                 .withExposedPorts(6379)
 
     }
+
+    class PropertyInitializer: ApplicationContextInitializer<ConfigurableApplicationContext> {
+        override fun initialize(applicationContext: ConfigurableApplicationContext) {
+            TestPropertySourceUtils.addInlinedPropertiesToEnvironment(
+                    applicationContext,
+                    "spring.redis.host=${redis.host}",
+                    "spring.redis.port=${redis.firstMappedPort}"
+            )
+        }
+    }
+
 }

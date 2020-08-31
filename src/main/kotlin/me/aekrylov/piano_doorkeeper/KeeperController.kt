@@ -1,6 +1,7 @@
 package me.aekrylov.piano_doorkeeper
 
 import com.fasterxml.jackson.annotation.JsonInclude
+import org.apache.logging.log4j.kotlin.Logging
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -13,6 +14,8 @@ class KeeperController(
         private val storageService: StorageService
 ) {
 
+    companion object : Logging
+
     @GetMapping("/check")
     fun check(request: CheckRequest): ResponseEntity<CheckResponse> {
         val user = User(request.keyId)
@@ -20,6 +23,7 @@ class KeeperController(
         if (!request.entrance) {
             //todo let them leave?
             if(!accessControlService.hasAccess(request.roomId, user)) {
+                logger.warn { "User $user tries to leave room ${request.roomId} while not having access to it" }
                 return ResponseEntity.status(403).body(AccessDenied)
             }
 
