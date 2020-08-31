@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.script.DefaultRedisScript
 /**
  * Redis-backed storage service
  * TODO can only use strings for some reason
+ * TODO maybe use something other than Lua scripts for ACID
  */
 open class RedisStorageService(private val template: RedisTemplate<String, String>) : StorageService {
 
