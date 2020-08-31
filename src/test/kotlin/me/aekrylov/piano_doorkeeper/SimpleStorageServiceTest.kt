@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 class SimpleStorageServiceTest {
 
-    private lateinit var service: SimpleStorageService
+    private lateinit var service: StorageService
     private val user = User(1)
 
     @BeforeEach

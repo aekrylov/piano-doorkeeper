@@ -20,6 +20,7 @@ extra["snippetsDir"] = file("build/generated-snippets")
 extra["testcontainersVersion"] = "1.14.3"
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
