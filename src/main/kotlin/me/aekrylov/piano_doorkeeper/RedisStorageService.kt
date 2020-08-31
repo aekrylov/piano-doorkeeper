@@ -2,7 +2,7 @@ package me.aekrylov.piano_doorkeeper
 
 import org.springframework.data.redis.core.RedisTemplate
 
-class RedisStorageService(template: RedisTemplate<String, String>) : StorageService {
+open class RedisStorageService(template: RedisTemplate<String, String>) : StorageService {
 
     //todo cant use int for some reason
     private val hash = template.boundHashOps<String, String>("rooms")

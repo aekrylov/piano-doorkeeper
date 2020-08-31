@@ -26,7 +26,7 @@ object Success: EnterRoomResponse()
 
 data class AlreadyEntered(val currentRoomId: Int): EnterRoomResponse()
 
-class SimpleStorageService: StorageService {
+open class SimpleStorageService: StorageService {
 
     private val state: ConcurrentHashMap<User, Int> = ConcurrentHashMap()
 
