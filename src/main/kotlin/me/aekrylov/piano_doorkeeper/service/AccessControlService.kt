@@ -1,5 +1,6 @@
-package me.aekrylov.piano_doorkeeper
+package me.aekrylov.piano_doorkeeper.service
 
+import me.aekrylov.piano_doorkeeper.User
 import org.springframework.stereotype.Service
 
 @Service

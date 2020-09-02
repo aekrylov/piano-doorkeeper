@@ -1,5 +1,6 @@
 package me.aekrylov.piano_doorkeeper
 
+import me.aekrylov.piano_doorkeeper.service.RedisStorageService
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean

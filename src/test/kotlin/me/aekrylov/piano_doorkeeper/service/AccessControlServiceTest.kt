@@ -1,6 +1,7 @@
-package me.aekrylov.piano_doorkeeper
+package me.aekrylov.piano_doorkeeper.service
 
 import io.kotlintest.shouldBe
+import me.aekrylov.piano_doorkeeper.User
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource

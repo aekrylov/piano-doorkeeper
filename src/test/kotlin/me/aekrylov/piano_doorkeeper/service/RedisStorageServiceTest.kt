@@ -1,7 +1,10 @@
-package me.aekrylov.piano_doorkeeper
+package me.aekrylov.piano_doorkeeper.service
 
 import io.kotlintest.matchers.types.shouldBeInstanceOf
 import io.kotlintest.shouldBe
+import me.aekrylov.piano_doorkeeper.ID
+import me.aekrylov.piano_doorkeeper.RedisContainer
+import me.aekrylov.piano_doorkeeper.User
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest

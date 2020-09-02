@@ -98,6 +98,15 @@ class PianoDoorkeeperApplicationTests {
                 .consumeWith(document("enter_different_room"))
     }
 
+    @Test
+    fun `should check for valid values`() {
+        exchange(user, -1, true)
+                .expectStatus().isBadRequest
+
+        exchange(User(-1), room, true)
+                .expectStatus().isBadRequest
+    }
+
     private fun exchange(user: User, roomId: Int, entrance: Boolean) = webTestClient.get()
             .uri { builder ->
                 builder.path("/check")

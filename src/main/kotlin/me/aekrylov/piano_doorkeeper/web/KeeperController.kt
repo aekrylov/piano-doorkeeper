@@ -1,11 +1,18 @@
-package me.aekrylov.piano_doorkeeper
+package me.aekrylov.piano_doorkeeper.web
 
 import com.fasterxml.jackson.annotation.JsonInclude
+import me.aekrylov.piano_doorkeeper.User
+import me.aekrylov.piano_doorkeeper.service.AccessControlService
+import me.aekrylov.piano_doorkeeper.service.AlreadyEntered
+import me.aekrylov.piano_doorkeeper.service.StorageService
+import me.aekrylov.piano_doorkeeper.service.Success
 import org.apache.logging.log4j.kotlin.Logging
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import javax.validation.Valid
+import javax.validation.constraints.Positive
 
 @RestController
 @RequestMapping("/")
@@ -17,7 +24,7 @@ class KeeperController(
     companion object : Logging
 
     @GetMapping("/check")
-    fun check(request: CheckRequest): ResponseEntity<CheckResponse> {
+    fun check(@Valid request: CheckRequest): ResponseEntity<CheckResponse> {
         val user = User(request.keyId)
 
         if (!request.entrance) {
@@ -47,13 +54,20 @@ class KeeperController(
 }
 
 data class CheckRequest(
+        @field:javax.validation.constraints.NotNull
+        @field:Positive
         val roomId: Int,
+
+        @field:javax.validation.constraints.NotNull
+        @field:Positive
         val keyId: Int,
+
+        @field:javax.validation.constraints.NotNull
         val entrance: Boolean
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-sealed class CheckResponse(val code: String, val message: String? = null)
+sealed class CheckResponse(code: String, val message: String? = null) : RestResponse(code)
 
 object AccessDenied: CheckResponse("access_denied")
 

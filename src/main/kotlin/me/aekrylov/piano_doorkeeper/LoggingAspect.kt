@@ -1,5 +1,8 @@
 package me.aekrylov.piano_doorkeeper
 
+import me.aekrylov.piano_doorkeeper.service.AlreadyEntered
+import me.aekrylov.piano_doorkeeper.service.EnterRoomResponse
+import me.aekrylov.piano_doorkeeper.service.Success
 import org.apache.logging.log4j.kotlin.Logging
 import org.aspectj.lang.annotation.AfterReturning
 import org.aspectj.lang.annotation.Aspect
@@ -11,7 +14,7 @@ class LoggingAspect {
 
     companion object : Logging
 
-    @AfterReturning("execution(* me.aekrylov.piano_doorkeeper.StorageService.enterRoom(..)) && args(user, roomId)",
+    @AfterReturning("execution(* me.aekrylov.piano_doorkeeper.service.StorageService.enterRoom(..)) && args(user, roomId)",
             returning = "response")
     fun profileRoomEnter(user: User, roomId: Int, response: EnterRoomResponse) {
         when (response) {
@@ -22,7 +25,7 @@ class LoggingAspect {
         }
     }
 
-    @AfterReturning("execution(* me.aekrylov.piano_doorkeeper.StorageService.leaveRoom(..)) && args(user, roomId)",
+    @AfterReturning("execution(* me.aekrylov.piano_doorkeeper.service.StorageService.leaveRoom(..)) && args(user, roomId)",
             returning = "success")
     fun profileRoomLeave(user: User, roomId: Int, success: Boolean) {
         if (success) {
