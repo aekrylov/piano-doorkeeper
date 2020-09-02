@@ -27,6 +27,7 @@ Content-Length: 24
 
 * `200` `enter_success`
 * `200` `leave_success`
+* `400` `invalid_request`
 * `403` `access_denied` - the user does not have access to the room
 * `403` `enter_different_room` - unable to enter, the user has entered a different room already
 * `403` `leave_not_in_room` - unable to leave, the user has not entered this room
@@ -34,5 +35,5 @@ Content-Length: 24
 ## How to run 
 
 * `docker-compose up -d`
-* Setup a local Redis instance manually and run `./gradlew bootRun`
+* Setup a local Redis instance manually (or use `docker-compose up redis`) and run `./gradlew bootRun`
 

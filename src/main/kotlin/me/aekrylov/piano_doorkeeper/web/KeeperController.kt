@@ -67,7 +67,7 @@ data class CheckRequest(
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-sealed class CheckResponse(code: String, val message: String? = null) : RestResponse(code)
+sealed class CheckResponse(code: String, message: String? = null) : RestResponse(code, message)
 
 object AccessDenied: CheckResponse("access_denied")
 
