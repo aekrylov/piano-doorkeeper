@@ -2,6 +2,8 @@
 
 ## How to use
 
+A test instance is available at https://piano-doorkeeper.herokuapp.com/
+
 ```http request
 GET /check?keyId=1&roomId=1&entrance=true HTTP/1.1
 Host: localhost:8080
